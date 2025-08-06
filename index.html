@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MR-CAS Form</title>
+</head>
+<body>
+  <h2>Event Registration</h2>
+  <form id="eventForm">
+    Teacher Name: <input type="text" id="teacherName"><br>
+    School Name: <input type="text" id="schoolName"><br>
+    Participant Name: <input type="text" id="participant"><br>
+
+    <h3>Events:</h3>
+    <input type="checkbox" id="Quiz" value="Yes"> Quiz<br>
+    <input type="checkbox" id="Coding" value="Yes"> Coding<br>
+    <input type="checkbox" id="Debate" value="Yes"> Debate<br>
+    <input type="checkbox" id="Poster" value="Yes"> Poster Making<br>
+    <input type="checkbox" id="Science" value="Yes"> Science Expo<br>
+    <input type="checkbox" id="Dance" value="Yes"> Dance<br>
+    <input type="checkbox" id="Singing" value="Yes"> Singing<br>
+    <input type="checkbox" id="Other" value="Yes"> Other<br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById("eventForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const data = {
+        teacherName: document.getElementById("teacherName").value,
+        schoolName: document.getElementById("schoolName").value,
+        participant: document.getElementById("participant").value,
+        Quiz: document.getElementById("Quiz").checked ? "Yes" : "",
+        Coding: document.getElementById("Coding").checked ? "Yes" : "",
+        Debate: document.getElementById("Debate").checked ? "Yes" : "",
+        Poster: document.getElementById("Poster").checked ? "Yes" : "",
+        Science: document.getElementById("Science").checked ? "Yes" : "",
+        Dance: document.getElementById("Dance").checked ? "Yes" : "",
+        Singing: document.getElementById("Singing").checked ? "Yes" : "",
+        Other: document.getElementById("Other").checked ? "Yes" : ""
+      };
+
+      fetch("YOUR_WEB_APP_URL_HERE", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => res.text())
+      .then(response => alert("Submitted successfully!"))
+      .catch(err => alert("Error: " + err));
+    });
+  </script>
+</body>
+</html>
